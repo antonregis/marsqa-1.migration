@@ -2,10 +2,9 @@
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using MarsQA_1.Helpers;
-using OpenQA.Selenium.Chrome;
+using MarsQA_1.Pages;
 using TechTalk.SpecFlow;
 using static MarsQA_1.Helpers.CommonMethods;
-
 
 namespace MarsQA_1.Utils
 {
@@ -65,10 +64,20 @@ namespace MarsQA_1.Utils
         [BeforeScenario]
         public void Setup(ScenarioContext scenarioContext)
         {
-            // Open chrome browser
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://tademo.codifyme.co.nz/freeflow");
+            // Launch the browser
+            Initialize();
+
+            // ExcelDataReader NotSupportedException fix: Enable encoding 1252 for .NET Core
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            // Referencing to an excel file and sheet name
+            ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelSigninDataPath, "Credentials");
+
+            // Call the SignIn class
+            SignIn.SigninStep();
+
+            // Wait for the page to load properly
+            Wait.WaitToBeClickable(driver, "XPath", "//a[contains(text(),'Languages')]", 8);
 
             // ExtentReport: Create node or the Scenario
             scenario = featureName.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
@@ -82,10 +91,6 @@ namespace MarsQA_1.Utils
             
             // Attaching screenshot to report
             scenario.AddScreenCaptureFromPath(img);
-            
-            // some experimental codes
-            // scenario.Log(Status.Info, "Test description");
-            // var test = extent.CreateTest(featurecontext.FeatureInfo.Title);
 
             //Close the browser
             driver.Quit();
