@@ -1,1 +1,2 @@
-# marsqa-1.migration
+# marsqa_1.migration
+Migration to net6.0
