@@ -10,7 +10,7 @@ using static MarsQA_1.Helpers.CommonMethods;
 namespace MarsQA_1.Utils
 {
     [Binding]
-    public class Start : CommonDriver
+    public class Start : Driver
     {
         private static ExtentTest featureName;
         private static ExtentTest scenario;
@@ -20,7 +20,7 @@ namespace MarsQA_1.Utils
         [BeforeTestRun]
         public static void InitializeReport()
         {
-            var htmlReporter = new ExtentHtmlReporter(@"D:\marsqa_1.migration\MarsQA_1\TestReports\Extentreports\");
+            var htmlReporter = new ExtentHtmlReporter(ConstantHelpers.ReportsPath);
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
         }
@@ -29,7 +29,7 @@ namespace MarsQA_1.Utils
         public static void BeforeFeature(FeatureContext featurecontext)
         {
             // ExtentReport: Create test or the Feature
-            featureName = extent.CreateTest("Feature", featurecontext.FeatureInfo.Title);  
+            featureName = extent.CreateTest<Feature>(featurecontext.FeatureInfo.Title);  
         }
 
         [AfterStep]

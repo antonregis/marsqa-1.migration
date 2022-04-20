@@ -10,7 +10,7 @@ using TechTalk.SpecFlow;
 namespace Freeflow.Utils
 {
     [Binding]
-    public class Start : CommonDriver
+    public class Start : Driver
     {
         private static ExtentTest featureName;
         private static ExtentTest scenario;
@@ -108,7 +108,7 @@ using AventStack.ExtentReports;
 namespace Freeflow.Utils
 {
     [Binding]
-    public class Start : CommonDriver
+    public class Start : Driver
     {
         private static ExtentReports extent;
 

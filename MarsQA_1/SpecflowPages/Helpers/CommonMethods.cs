@@ -11,7 +11,7 @@ namespace MarsQA_1.Helpers
         {
             public static string SaveScreenshot(IWebDriver driver, string ScreenShotFileName)
             {
-                var folderLocation = (@"D:\marsqa_1.migration\MarsQA_1\TestReports\Screenshots\");
+                var folderLocation = (ConstantHelpers.ScreenshotPath);
 
                 if (!System.IO.Directory.Exists(folderLocation))
                 {

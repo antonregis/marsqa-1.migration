@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 namespace Freeflow.StepDefinitions
 {
     [Binding]
-    public class CreateFreeflowStepDefinitions : CommonDriver
+    public class CreateFreeflowStepDefinitions : Driver
     {
         // Initializing page object
         FreeflowPage freeflowPageObj = new FreeflowPage();
